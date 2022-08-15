@@ -23,7 +23,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    if (e.target.todo.value === "") return;
     const newTodo = {
       //you will get new ids every time
       id: new Date().getTime(),
@@ -71,10 +71,13 @@ function App() {
           type="text"
           onChange={(e) => setTodo(e.target.value)}
           value={todo}
+          name="todo"
         />
-        <button className="rounded-md text-yellow-500 text-md" type="submit">
-          + New Todo
-        </button>
+        {todos.length < 10 && (
+          <button className="rounded-md text-yellow-500 text-md" type="submit">
+            + New Todo
+          </button>
+        )}
       </form>
       {todos.map((todo) => (
         <div className="flex flex-wrap items-baseline" key={todo.id}>
@@ -89,20 +92,20 @@ function App() {
               value={editingText}
             />
           ) : (
-            <div className="w-40 ml-8 text-amber-400">{todo.text}</div>
+            <div className="w-48 ml-8 text-amber-400">{todo.text}</div>
           )}
-
+          <input
+            className="p-2 ml-4 "
+            type="checkbox"
+            onChange={() => toggleComplete(todo.id)}
+            checked={todo.completed}
+          />
           <button
             className="text-red-400 m-2 mr-6 ml-8 text-sm"
             onClick={() => deleteTodo(todo.id)}
           >
             DELETE
           </button>
-          <input
-            type="checkbox"
-            onChange={() => toggleComplete(todo.id)}
-            checked={todo.completed}
-          />
 
           {todoEditing === todo.id ? (
             <button
