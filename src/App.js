@@ -67,7 +67,7 @@ function App() {
       </h1>
       <form className=" flex flex-wrap items-center" onSubmit={handleSubmit}>
         <input
-          className=" p-1 text-center m-4 text-amber-800 bg-orange-300 rounded-md bg-blend-color"
+          className=" p-1 text-center mx-4 my-4 text-amber-800 bg-orange-300 rounded-md bg-blend-color"
           type="text"
           onChange={(e) => setTodo(e.target.value)}
           value={todo}
